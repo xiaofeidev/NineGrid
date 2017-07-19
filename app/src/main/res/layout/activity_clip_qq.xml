@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ClipQQActivity">
+
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/toolbar" />
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/container"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            app:layout_widthPercent="32.96%"
+            app:layout_heightPercent="32.96%"
+            app:layout_marginLeftPercent="0.29%"
+            app:layout_marginRightPercent="0.29%"
+            app:layout_marginTopPercent="0.29%"
+            app:layout_marginBottomPercent="0.29%"
+            tools:Compat="@mipmap/ic_launcher"/>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            app:layout_widthPercent="32.96%"
+            app:layout_heightPercent="32.96%"
+            app:layout_marginLeftPercent="0.29%"
+            app:layout_marginRightPercent="0.29%"
+            app:layout_marginTopPercent="0.29%"
+            app:layout_marginBottomPercent="0.29%"
+            tools:Compat="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:layout_toRightOf="@+id/imageView1"/>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            app:layout_widthPercent="32.96%"
+            app:layout_heightPercent="32.96%"
+            app:layout_marginLeftPercent="0.29%"
+            app:layout_marginRightPercent="0.29%"
+            app:layout_marginTopPercent="0.29%"
+            app:layout_marginBottomPercent="0.29%"
+            tools:Compat="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:layout_toRightOf="@+id/imageView2"/>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            app:layout_widthPercent="32.96%"
+            app:layout_heightPercent="32.96%"
+            app:layout_marginLeftPercent="0.29%"
+            app:layout_marginRightPercent="0.29%"
+            app:layout_marginTopPercent="0.29%"
+            app:layout_marginBottomPercent="0.29%"
+            tools:Compat="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/imageView1"
+            android:layout_alignParentLeft="true"/>
+
+        <ImageView
+            android:id="@+id/imageView5"
+            app:layout_widthPercent="32.96%"
+            app:layout_heightPercent="32.96%"
+            app:layout_marginLeftPercent="0.29%"
+            app:layout_marginRightPercent="0.29%"
+            app:layout_marginTopPercent="0.29%"
+            app:layout_marginBottomPercent="0.29%"
+            tools:Compat="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView4"/>
+
+        <ImageView
+            android:id="@+id/imageView6"
+            app:layout_widthPercent="32.96%"
+            app:layout_heightPercent="32.96%"
+            app:layout_marginLeftPercent="0.29%"
+            app:layout_marginRightPercent="0.29%"
+            app:layout_marginTopPercent="0.29%"
+            app:layout_marginBottomPercent="0.29%"
+            tools:Compat="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/imageView3"
+            android:layout_toRightOf="@+id/imageView5"/>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            app:layout_widthPercent="32.96%"
+            app:layout_heightPercent="32.96%"
+            app:layout_marginLeftPercent="0.29%"
+            app:layout_marginRightPercent="0.29%"
+            app:layout_marginTopPercent="0.29%"
+            app:layout_marginBottomPercent="0.29%"
+            tools:Compat="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/imageView4"/>
+
+        <ImageView
+            android:id="@+id/imageView8"
+            app:layout_widthPercent="32.96%"
+            app:layout_heightPercent="32.96%"
+            app:layout_marginLeftPercent="0.29%"
+            app:layout_marginRightPercent="0.29%"
+            app:layout_marginTopPercent="0.29%"
+            app:layout_marginBottomPercent="0.29%"
+            tools:Compat="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/imageView5"
+            android:layout_toRightOf="@+id/imageView7"/>
+
+        <ImageView
+            android:id="@+id/imageView9"
+            app:layout_widthPercent="32.96%"
+            app:layout_heightPercent="32.96%"
+            app:layout_marginLeftPercent="0.29%"
+            app:layout_marginRightPercent="0.29%"
+            app:layout_marginTopPercent="0.29%"
+            app:layout_marginBottomPercent="0.29%"
+            tools:Compat="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:layout_below="@+id/imageView6"
+            android:layout_toRightOf="@+id/imageView8"/>
+    </android.support.percent.PercentRelativeLayout>
+
+
+</RelativeLayout>

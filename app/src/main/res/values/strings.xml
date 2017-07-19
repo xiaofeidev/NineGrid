@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">九宫格构图</string>
+
+    <string name="save_success">图片已成功保存</string>
+    <string name="save_failure">图片保存失败</string>
+
+    <string name="size_error">图像尺寸太奇葩，拒绝服务</string>
+
+    <string name="stroke_width">线条粗细</string>
+
+    <string name="loading">正在加载</string>
+
+    <string name="about">关于</string>
+    <string name="open_new">打开</string>
+
+    <string name="main_hint">点击任意位置打开图片</string>
+
+    <string name="pick_image_hint">选择一个图片选择器</string>
+</resources>
