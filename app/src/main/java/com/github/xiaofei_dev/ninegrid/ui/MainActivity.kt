@@ -9,7 +9,6 @@ import android.os.Build
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -28,10 +27,12 @@ class MainActivity : AppCompatActivity() {
         val REQUEST_SELECT_PICTURE = 0x01
     }
 
-    var photos:ArrayList<String> = ArrayList()
+    private var photos:ArrayList<String> = ArrayList()
     //待加载图像的实际尺寸
-    var bmpWidth:Float = 0f
-    var bmpHeight:Float = 0f
+    private var bmpWidth:Float = 0f
+    private var bmpHeight:Float = 0f
+
+    private var mPressedTime: Long = 0
 
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 photos.add(getRealPathFromURI(data.data))
 //                start.text  = "已选择，点击重选"
 
-                Log.d("MainActivity",photos.toString())
+//                Log.d("MainActivity",photos.toString())
 
                 mainPhotoView.visibility = View.VISIBLE
                 Glide.with(this).load(photos[0]).asBitmap().into(mainPhotoView)
@@ -97,15 +98,26 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
 
             R.id.about ->{
-
+                startActivity<AboutActivity>()
             }
 
         }
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onBackPressed() {
+        val mNowTime = System.currentTimeMillis()//记录本次按键时刻
+        if (mNowTime - mPressedTime > 1000) {//比较两次按键时间差
+            toast("再按一次退出应用")
+            mPressedTime = mNowTime
+        } else {
+            //退出程序
+            super.onBackPressed()
+        }
+    }
+
     private fun initView(){
-        toolBarMain.setTitle("")
+        toolBarMain.title = ""
         setSupportActionBar(toolBarMain)
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 //        btn_save.visibility = View.GONE
@@ -203,7 +215,7 @@ class MainActivity : AppCompatActivity() {
         val cursor = contentResolver.query(contentURI, null, null, null, null)
         if (cursor == null) {
             // Source is Dropbox or other similar local file path
-            result = contentURI.getPath()
+            result = contentURI.path
         } else {
             cursor.moveToFirst()
             val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)

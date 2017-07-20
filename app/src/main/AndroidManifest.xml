@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,11 +28,22 @@
             <!--android:name="me.iwf.photopicker.PhotoPagerActivity"-->
             <!--android:theme="@style/Theme.AppCompat.NoActionBar" />-->
         <activity android:name=".ui.ClipQQActivity"
-            android:label="QQ"/>
+            android:label="QQ"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.NineGridActivity"
-            android:label="自由九宫格"/>
+            android:label="自由九宫格"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.ClipWeChatActivity"
-            android:label="WeChat"/>
+            android:label="WeChat"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.AboutActivity"
+            android:label="@string/about"
+            android:theme="@style/AppTheme.About"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

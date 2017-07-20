@@ -8,4 +8,6 @@
     <color name="colorAccent">#fdfdfe</color>
 
     <color name="translucent">#19000000</color>
+
+    <color name="whiteLow">#f0f0f0</color>
 </resources>

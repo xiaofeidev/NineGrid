@@ -16,8 +16,8 @@ import android.util.AttributeSet;
 
 public class NineGirdImageView extends AppCompatImageView {
 
-    private Paint mPaint = new Paint();
-    private Path mPath=new Path();
+    private final Paint mPaint = new Paint();
+    private final Path mPath=new Path();
 
     public NineGirdImageView(@NonNull Context context) {
         this(context,null);

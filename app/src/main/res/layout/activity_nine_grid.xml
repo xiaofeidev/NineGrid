@@ -38,7 +38,6 @@
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:padding="6dp"
         android:background="@color/colorPrimary">
         <TextView

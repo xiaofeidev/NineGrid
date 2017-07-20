@@ -100,7 +100,6 @@
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:visibility="gone">

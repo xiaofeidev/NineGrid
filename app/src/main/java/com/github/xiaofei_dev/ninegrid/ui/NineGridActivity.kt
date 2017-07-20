@@ -28,8 +28,8 @@ class NineGridActivity : BaseActivity() {
         var width:Int
         var height:Int
         //待加载图像的实际尺寸
-        var bmpWidth:Float
-        var bmpHeight:Float
+        val bmpWidth:Float
+        val bmpHeight:Float
         val options: BitmapFactory.Options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
         BitmapFactory.decodeFile(imagePaths[0],options)

@@ -15,6 +15,17 @@
         <item name="android:windowAllowReturnTransitionOverlap">false</item>-->
     </style>
 
+    <style name="blackTextColor">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.About">
+        <item name="colorAccent">@android:color/holo_green_light</item>
+    </style>
+
+
+
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

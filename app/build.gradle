@@ -8,15 +8,27 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.github.xiaofei_dev.ninegrid"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+//            buildConfigField "boolean", "LOG_DEBUG", "true"
+////            debuggable true
+////            applicationIdSuffix ".debug"
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true//是否混淆
+            shrinkResources true//是否去除无效的资源文件
+            zipAlignEnabled true// Zipalign优化
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
