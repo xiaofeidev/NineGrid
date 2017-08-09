@@ -18,7 +18,7 @@ class ClipQQActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clip_qq)
-        imagePaths = intent.getStringArrayListExtra(IMAGE_PATH)
+        imagePath = intent.getStringExtra(IMAGE_PATH)
         initView()
     }
 
@@ -42,7 +42,7 @@ class ClipQQActivity : BaseActivity() {
         layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT)
         container.layoutParams = layoutParams
 
-        Glide.with(this).load(imagePaths[0]).asBitmap().skipMemoryCache(true).into(object:SimpleTarget<Bitmap>(){
+        Glide.with(this).load(imagePath).asBitmap().skipMemoryCache(true).into(object:SimpleTarget<Bitmap>(){
             override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>?) {
                 bmpWidth = resource.width.toFloat()
                 bmpHeight = resource.height.toFloat()

@@ -105,6 +105,14 @@
         android:visibility="gone">
 
         <ImageButton
+            android:id="@+id/btn_action_crop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_btn_crop" />
+
+        <ImageButton
             android:id="@+id/btn_action_qq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

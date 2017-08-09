@@ -17,7 +17,7 @@ class NineGridActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nine_grid)
-        imagePaths = intent.getStringArrayListExtra(IMAGE_PATH)
+        imagePath = intent.getStringExtra(IMAGE_PATH)
         initViews()
     }
 
@@ -32,7 +32,7 @@ class NineGridActivity : BaseActivity() {
         val bmpHeight:Float
         val options: BitmapFactory.Options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
-        BitmapFactory.decodeFile(imagePaths[0],options)
+        BitmapFactory.decodeFile(imagePath,options)
         bmpWidth = options.outWidth.toFloat()
         bmpHeight = options.outHeight.toFloat()
 
@@ -59,7 +59,7 @@ class NineGridActivity : BaseActivity() {
                 height = (width.toFloat()/oldWidth * height).toInt()
             }
         }
-        Glide.with(this).load(imagePaths[0]).asBitmap().skipMemoryCache(true).override(width,height)/*.centerCrop()*//*.fitCenter()*/.into(nineGridImageView)
+        Glide.with(this).load(imagePath).asBitmap().skipMemoryCache(true).override(width,height)/*.centerCrop()*//*.fitCenter()*/.into(nineGridImageView)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

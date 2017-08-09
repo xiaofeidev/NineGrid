@@ -3,20 +3,25 @@ package com.github.xiaofei_dev.ninegrid.ui
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
 import com.github.xiaofei_dev.ninegrid.R
+import com.yalantis.ucrop.UCrop
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 
 //未继承 BaseActivity
@@ -27,7 +32,8 @@ class MainActivity : AppCompatActivity() {
         val REQUEST_SELECT_PICTURE = 0x01
     }
 
-    private var photos:ArrayList<String> = ArrayList()
+    private var mUri:Uri = Uri.parse("")
+    private var photo:String = ""
     //待加载图像的实际尺寸
     private var bmpWidth:Float = 0f
     private var bmpHeight:Float = 0f
@@ -44,33 +50,38 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
 //        if (resultCode == android.app.Activity.RESULT_OK && requestCode == me.iwf.photopicker.PhotoPicker.REQUEST_CODE) {
 //            if (data !== null) {
-//                photos = data.getStringArrayListExtra(me.iwf.photopicker.PhotoPicker.KEY_SELECTED_PHOTOS)
+//                photo = data.getStringArrayListExtra(me.iwf.photopicker.PhotoPicker.KEY_SELECTED_PHOTOS)
 ////                start.text  = "已选择，点击重选"
-//                Log.d("MainActivity",photos.toString())
+//                Log.d("MainActivity",photo.toString())
 //
 //                mainPhotoView.visibility = View.VISIBLE
-//                Glide.with(this).load(photos[0]).asBitmap().into(mainPhotoView)
+//                Glide.with(this).load(photo[0]).asBitmap().into(mainPhotoView)
 //
 //                mainBottomBar.visibility = View.VISIBLE
 ////                btn_action_qq.visibility = View.VISIBLE
 ////                btn_action_wechat.visibility = View.VISIBLE
 ////                btn_action_nine.visibility = View.VISIBLE
-////                startActivity<ClipQQActivity>(ClipQQActivity.IMAGE_PATH to photos)
-////                android.util.Log.d("MainActivity",photos.toString())
+////                startActivity<ClipQQActivity>(ClipQQActivity.IMAGE_PATH to photo)
+////                android.util.Log.d("MainActivity",photo.toString())
 //            }
 //        }
 
         if (resultCode == android.app.Activity.RESULT_OK && requestCode == REQUEST_SELECT_PICTURE) {
             if (data !== null) {
-                photos.clear()
-                val path = getRealPathFromURI(data.data)
-                photos.add(getRealPathFromURI(data.data))
+                mUri = data.data
+                val path = getRealPathFromURI(mUri)
+                photo = path
 //                start.text  = "已选择，点击重选"
 
-//                Log.d("MainActivity",photos.toString())
+                Log.d("MainActivity","${data.data.toString()}\n${photo}")
 
                 mainPhotoView.visibility = View.VISIBLE
-                Glide.with(this).load(photos[0]).asBitmap().into(mainPhotoView)
+//                mainPhotoView.postDelayed(Runnable {  Glide.with(this).load(photo).asBitmap().into(mainPhotoView) },2000)
+                val photo = BitmapFactory.decodeFile(photo)
+                val stream = ByteArrayOutputStream()
+                photo.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
+                Glide.with(this).load(stream.toByteArray()).asBitmap().into(mainPhotoView)
 
                 //用节省开销的优雅方式测量图片尺寸
                 val options: BitmapFactory.Options = BitmapFactory.Options()
@@ -83,12 +94,32 @@ class MainActivity : AppCompatActivity() {
 //                btn_action_qq.visibility = View.VISIBLE
 //                btn_action_wechat.visibility = View.VISIBLE
 //                btn_action_nine.visibility = View.VISIBLE
-//                startActivity<ClipQQActivity>(ClipQQActivity.IMAGE_PATH to photos)
-//                android.util.Log.d("MainActivity",photos.toString())
+//                startActivity<ClipQQActivity>(ClipQQActivity.IMAGE_PATH to photo)
+//                android.util.Log.d("MainActivity",photo.toString())
             }
+        }else if(resultCode == android.app.Activity.RESULT_OK && requestCode == UCrop.REQUEST_CROP){
+            val uri:Uri? = UCrop.getOutput(data!!)
+            if (uri != null){
+                mUri = uri
+                val path = getRealPathFromURI(uri)
+                photo = path
+//                start.text  = "已选择，点击重选"
+                Log.d("MainActivity","${uri}\n${photo}")
+
+                Glide.with(this).load(photo)/*.asBitmap()*/.skipMemoryCache(true).into(mainPhotoView)
+
+                //用节省开销的优雅方式测量图片尺寸
+                val options: BitmapFactory.Options = BitmapFactory.Options()
+                options.inJustDecodeBounds = true
+                BitmapFactory.decodeFile(path,options)
+                bmpWidth = options.outWidth.toFloat()
+                bmpHeight = options.outHeight.toFloat()
+            }
+
+
         }
     }
-    
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_tool_bar, menu)
         return super.onCreateOptionsMenu(menu)
@@ -131,12 +162,17 @@ class MainActivity : AppCompatActivity() {
             pickFromGallery()
         }
 
+        btn_action_crop.setOnClickListener {
+            val uCrop = UCrop.of(mUri, Uri.fromFile(File(cacheDir, "cache.png")))
+            uCrop.start(this@MainActivity)
+        }
+
         btn_action_qq.setOnClickListener {
             if(bmpWidth != bmpHeight){
                 toast("图像宽高不一致")
 //                return@setOnClickListener
             }else{
-                startActivity<ClipQQActivity>(BaseActivity.IMAGE_PATH to photos)
+                startActivity<ClipQQActivity>(BaseActivity.IMAGE_PATH to photo)
             }
 
         }
@@ -146,7 +182,7 @@ class MainActivity : AppCompatActivity() {
                 toast("图像宽高不一致")
 //                return@setOnClickListener
             }else{
-                startActivity<ClipWeChatActivity>(BaseActivity.IMAGE_PATH to photos)
+                startActivity<ClipWeChatActivity>(BaseActivity.IMAGE_PATH to photo)
             }
 
         }
@@ -157,7 +193,7 @@ class MainActivity : AppCompatActivity() {
                 toast(R.string.size_error)
 //                return@setOnClickListener
             }else{
-                startActivity<NineGridActivity>(BaseActivity.IMAGE_PATH to photos)
+                startActivity<NineGridActivity>(BaseActivity.IMAGE_PATH to photo)
             }
 
         }

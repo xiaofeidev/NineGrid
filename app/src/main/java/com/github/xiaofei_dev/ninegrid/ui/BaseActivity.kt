@@ -9,7 +9,7 @@ abstract class BaseActivity : AppCompatActivity() {
         val IMAGE_PATH = "IMAGE_PATH"
         val TAG = "BaseActivity"
     }
-    var imagePaths: ArrayList<String> = ArrayList()
+    var imagePath: String = ""
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
