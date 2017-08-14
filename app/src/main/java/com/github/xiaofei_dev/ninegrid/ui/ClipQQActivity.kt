@@ -46,11 +46,6 @@ class ClipQQActivity : BaseActivity() {
             override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>?) {
                 bmpWidth = resource.width.toFloat()
                 bmpHeight = resource.height.toFloat()
-//                if(bmpWidth != bmpHeight){
-//                    toast("图像宽高不一致")
-//                    finish()
-//                    return
-//                }
                 //需要裁剪的长度
                 val clipStep = (bmpWidth * 0.3296).toInt()
                 //中间边距的二分之一
@@ -93,7 +88,6 @@ class ClipQQActivity : BaseActivity() {
                 imageView9.setImageBitmap(Bitmap
                         .createBitmap(resource,(bmpWidthThirdTow + marginStep).toInt(),(bmpWidthThirdTow + marginStep).toInt()
                                 ,clipStep,clipStep))
-
 //                resource.recycle()
             }
         })

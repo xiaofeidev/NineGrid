@@ -53,6 +53,8 @@
 -optimizations !code/simplification/cast,!field/*,!class/merging/*
 
 
+
+
 ############################################
 
 # Android开发中一些需要保留的公共部分
@@ -285,6 +287,12 @@
   **[] $VALUES;
   public *;
 }
+
+
+# uCrop
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }
 
 
 # for DexGuard only

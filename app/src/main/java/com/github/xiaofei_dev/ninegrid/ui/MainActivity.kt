@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
@@ -16,7 +17,11 @@ import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
 import com.github.xiaofei_dev.ninegrid.R
+import com.github.xiaofei_dev.ninegrid.extensions.deleteFiles
+import com.github.xiaofei_dev.ninegrid.extensions.getViewBitmap
+import com.github.xiaofei_dev.ninegrid.extensions.saveImageToDir
 import com.yalantis.ucrop.UCrop
+import com.yalantis.ucrop.UCropActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -40,15 +45,21 @@ class MainActivity : AppCompatActivity() {
 
     private var mPressedTime: Long = 0
 
-
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        //删除缓存文件
+        deleteFiles(cacheDir)
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
-//        if (resultCode == android.app.Activity.RESULT_OK && requestCode == me.iwf.photopicker.PhotoPicker.REQUEST_CODE) {
+/*//        if (resultCode == android.app.Activity.RESULT_OK && requestCode == me.iwf.photopicker.PhotoPicker.REQUEST_CODE) {
 //            if (data !== null) {
 //                photo = data.getStringArrayListExtra(me.iwf.photopicker.PhotoPicker.KEY_SELECTED_PHOTOS)
 ////                start.text  = "已选择，点击重选"
@@ -64,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 ////                startActivity<ClipQQActivity>(ClipQQActivity.IMAGE_PATH to photo)
 ////                android.util.Log.d("MainActivity",photo.toString())
 //            }
-//        }
+//        }*/
 
         if (resultCode == android.app.Activity.RESULT_OK && requestCode == REQUEST_SELECT_PICTURE) {
             if (data !== null) {
@@ -77,11 +88,9 @@ class MainActivity : AppCompatActivity() {
 
                 mainPhotoView.visibility = View.VISIBLE
 //                mainPhotoView.postDelayed(Runnable {  Glide.with(this).load(photo).asBitmap().into(mainPhotoView) },2000)
-                val photo = BitmapFactory.decodeFile(photo)
-                val stream = ByteArrayOutputStream()
-                photo.compress(Bitmap.CompressFormat.JPEG, 100, stream)
 
-                Glide.with(this).load(stream.toByteArray()).asBitmap().into(mainPhotoView)
+
+                Glide.with(this).load(photo).asBitmap().into(mainPhotoView)
 
                 //用节省开销的优雅方式测量图片尺寸
                 val options: BitmapFactory.Options = BitmapFactory.Options()
@@ -91,11 +100,6 @@ class MainActivity : AppCompatActivity() {
                 bmpHeight = options.outHeight.toFloat()
 
                 mainBottomBar.visibility = View.VISIBLE
-//                btn_action_qq.visibility = View.VISIBLE
-//                btn_action_wechat.visibility = View.VISIBLE
-//                btn_action_nine.visibility = View.VISIBLE
-//                startActivity<ClipQQActivity>(ClipQQActivity.IMAGE_PATH to photo)
-//                android.util.Log.d("MainActivity",photo.toString())
             }
         }else if(resultCode == android.app.Activity.RESULT_OK && requestCode == UCrop.REQUEST_CROP){
             val uri:Uri? = UCrop.getOutput(data!!)
@@ -106,7 +110,21 @@ class MainActivity : AppCompatActivity() {
 //                start.text  = "已选择，点击重选"
                 Log.d("MainActivity","${uri}\n${photo}")
 
-                Glide.with(this).load(photo)/*.asBitmap()*/.skipMemoryCache(true).into(mainPhotoView)
+                val pho = BitmapFactory.decodeFile(photo)
+                val stream = ByteArrayOutputStream()
+                pho.compress(Bitmap.CompressFormat.PNG, 100, stream)
+//                Glide.with(this).load(stream.toByteArray()).asBitmap().skipMemoryCache(true).into(mainPhotoView)
+//                mainPhotoView.postDelayed(Runnable {
+//                    Glide.with(this).load(/*photo*/stream.toByteArray()).asBitmap().skipMemoryCache(true).into(mainPhotoView)
+//                    //用节省开销的优雅方式测量图片尺寸
+//                    val options: BitmapFactory.Options = BitmapFactory.Options()
+//                    options.inJustDecodeBounds = true
+//                    BitmapFactory.decodeFile(path,options)
+//                    bmpWidth = options.outWidth.toFloat()
+//                    bmpHeight = options.outHeight.toFloat()
+//                },1000)
+
+                Glide.with(this).load(photo).asBitmap().skipMemoryCache(true).into(mainPhotoView)
 
                 //用节省开销的优雅方式测量图片尺寸
                 val options: BitmapFactory.Options = BitmapFactory.Options()
@@ -115,8 +133,6 @@ class MainActivity : AppCompatActivity() {
                 bmpWidth = options.outWidth.toFloat()
                 bmpHeight = options.outHeight.toFloat()
             }
-
-
         }
     }
 
@@ -127,11 +143,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
+            R.id.save ->{
+                saveImageToDir(getViewBitmap(mainPhotoView),"NineGrid")
+            }
             R.id.about ->{
                 startActivity<AboutActivity>()
             }
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -150,20 +167,32 @@ class MainActivity : AppCompatActivity() {
     private fun initView(){
         toolBarMain.title = ""
         setSupportActionBar(toolBarMain)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        btn_save.visibility = View.GONE
-        start.setOnClickListener {
-//            PhotoPicker.builder()
-//                    .setPhotoCount(1)
-//                    .setShowCamera(true)
-//                    .setShowGif(true)
-//                    .setPreviewEnabled(true)
-//                    .start(this, PhotoPicker.REQUEST_CODE)
+//            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//            btn_save.visibility = View.GONE
+            start.setOnClickListener {
             pickFromGallery()
         }
 
         btn_action_crop.setOnClickListener {
-            val uCrop = UCrop.of(mUri, Uri.fromFile(File(cacheDir, "cache.png")))
+
+            val options = UCrop.Options()
+            options.setCompressionFormat(Bitmap.CompressFormat.PNG)
+            //设置裁剪图片的图片质量
+            options.setCompressionQuality(90)
+            //设置你想要指定的可操作的手势
+            options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL)
+            //是否能调整裁剪框
+            options.setFreeStyleCropEnabled(true)
+            //设置 toolbar 颜色
+            options.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+            //状态栏颜色
+            options.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+//        options.setDimmedLayerColor(ContextCompat.getColor(this, R.color.bottom_bar_bk));
+//        options.setCropFrameColor(ContextCompat.getColor(this, R.color.bottom_bar_bk));
+            options.setActiveWidgetColor(ContextCompat.getColor(this, R.color.active))
+//            val uCrop = UCrop.of(mUri, Uri.fromFile(File(Environment.getExternalStorageDirectory(), "NineGrid/${System.currentTimeMillis()}.png")))
+            val uCrop = UCrop.of(mUri, Uri.fromFile(File(cacheDir, "${System.currentTimeMillis()}.png")))
+                    .withOptions(options)
             uCrop.start(this@MainActivity)
         }
 
@@ -174,7 +203,6 @@ class MainActivity : AppCompatActivity() {
             }else{
                 startActivity<ClipQQActivity>(BaseActivity.IMAGE_PATH to photo)
             }
-
         }
 
         btn_action_wechat.setOnClickListener {
@@ -258,6 +286,7 @@ class MainActivity : AppCompatActivity() {
             result = cursor.getString(idx)
             cursor.close()
         }
+//        return File(result).absolutePath
         return result
     }
 }

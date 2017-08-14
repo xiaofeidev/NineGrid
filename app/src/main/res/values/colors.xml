@@ -10,4 +10,5 @@
     <color name="translucent">#19000000</color>
 
     <color name="whiteLow">#f0f0f0</color>
+    <color name="active">#00a2ff</color>
 </resources>

@@ -79,3 +79,37 @@ fun Activity.getViewBitmap(v: View): Bitmap {
     return bitmap
 }
 
+////删除指定文件或整个文件夹的所有文件
+//fun Activity.RecursionDeleteFile(file: File) {
+//    if (file.isFile) {
+//        file.delete()
+//        return
+//    }
+//    if (file.isDirectory) {
+//        val childFile = file.listFiles()
+//        if (childFile == null || childFile.size == 0) {
+//            file.delete()
+//            return
+//        }
+//        for (f in childFile) {
+//            RecursionDeleteFile(f)
+//        }
+//        file.delete()
+//    }
+//}
+//删除缓存文件夹中的缓存图片
+fun Activity.deleteFiles(file: File) {
+    if (file.isDirectory) {
+        val childFile = file.listFiles()
+        if (childFile == null || childFile.size == 0) {
+            file.delete()
+            return
+        }
+        for (f in childFile) {
+            if(f.isFile && f.path.endsWith(".png")){
+                f.delete()
+            }
+        }
+    }
+}
+
