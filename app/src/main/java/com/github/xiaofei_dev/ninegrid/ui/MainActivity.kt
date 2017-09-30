@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        //删除缓存文件
+        //删除缓存图片文件
         deleteFiles(cacheDir)
     }
 
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 //        }*/
 
         if (resultCode == android.app.Activity.RESULT_OK && requestCode == REQUEST_SELECT_PICTURE) {
-            if (data !== null) {
+            if (data != null) {
                 mUri = data.data
                 val path = getRealPathFromURI(mUri)
                 photo = path
