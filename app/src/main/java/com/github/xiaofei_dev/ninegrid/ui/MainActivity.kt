@@ -31,7 +31,6 @@ import java.io.File
 
 //未继承 BaseActivity
 class MainActivity : AppCompatActivity() {
-
     companion object {
         val REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101
         val REQUEST_SELECT_PICTURE = 0x01
@@ -266,7 +265,8 @@ class MainActivity : AppCompatActivity() {
 //            intent.addCategory(Intent.CATEGORY_OPENABLE)
 
             val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
+//            intent.type = "image/*"
+            intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
 //            //这样会有一个自定义选择器
 //            startActivityForResult(Intent.createChooser(intent, getString(R.string.pick_image_hint)), REQUEST_SELECT_PICTURE);
             startActivityForResult(intent, REQUEST_SELECT_PICTURE)

@@ -1,7 +1,9 @@
 package com.github.xiaofei_dev.ninegrid.ui
 
 import android.graphics.BitmapFactory
+import android.media.ExifInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.SeekBar
 import com.bumptech.glide.Glide
@@ -27,20 +29,33 @@ class NineGridActivity : BaseActivity() {
         var width:Int
         var height:Int
         //待加载图像的实际尺寸
-        val bmpWidth:Float
-        val bmpHeight:Float
+        var bmpWidth:Float
+        var bmpHeight:Float
         val options: BitmapFactory.Options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
         BitmapFactory.decodeFile(imagePath,options)
         bmpWidth = options.outWidth.toFloat()
         bmpHeight = options.outHeight.toFloat()
+        Log.d(TAG,"bmpWidth~:$bmpWidth bmpHeight~:$bmpHeight")
 
+
+        //https://my.oschina.net/u/1444935/blog/313191
+        //https://developer.android.com/reference/android/media/ExifInterface.html#TAG_ORIENTATION
+        val imgOri = ExifInterface(imagePath).getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED)
+        //如果图片的旋转值为 90°
+        if (imgOri == ExifInterface.ORIENTATION_ROTATE_90){
+            val m = bmpWidth
+            bmpWidth = bmpHeight
+            bmpHeight = m
+        }
 //        //如果待处理图像的长宽比太奇葩则拒绝服务
 //        if (bmpWidth/bmpHeight > 2f || bmpWidth/bmpHeight < 0.5f){
 //            toast(R.string.size_error)
 //            finish()
 //            return
 //        }
+
 
         //这一堆判断看来挺乱，其实就是把待加载图片的最终尺寸设为充满容器且没有白边且适应屏幕
         if (bmpWidth == bmpHeight){
@@ -49,7 +64,8 @@ class NineGridActivity : BaseActivity() {
         }else if(bmpWidth > bmpHeight){
             width = imageContainer.measuredWidth
             height = (width.toFloat()/bmpWidth * bmpHeight).toInt()
-        }else{
+        }else if(bmpHeight > bmpWidth){
+            Log.d(TAG,"bmpWidth:$bmpWidth bmpHeight:$bmpHeight")
             height = imageContainer.measuredHeight
             width = (height.toFloat()/bmpHeight * bmpWidth).toInt()
             if(width > imageContainer.measuredWidth){
@@ -57,6 +73,9 @@ class NineGridActivity : BaseActivity() {
                 width = imageContainer.measuredWidth
                 height = (width.toFloat()/oldWidth * height).toInt()
             }
+        }else{
+            width = 0
+            height = 0
         }
         Glide.with(this).load(imagePath).asBitmap().skipMemoryCache(true).override(width,height)/*.centerCrop()*//*.fitCenter()*/.into(nineGridImageView)
     }
