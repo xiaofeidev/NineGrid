@@ -44,7 +44,7 @@ class NineGridActivity : BaseActivity() {
         val imgOri = ExifInterface(imagePath).getAttributeInt(ExifInterface.TAG_ORIENTATION,
                 ExifInterface.ORIENTATION_UNDEFINED)
         //如果图片的旋转值为 90°
-        if (imgOri == ExifInterface.ORIENTATION_ROTATE_90){
+        if (imgOri == ExifInterface.ORIENTATION_ROTATE_90 || imgOri == ExifInterface.ORIENTATION_ROTATE_270){
             val m = bmpWidth
             bmpWidth = bmpHeight
             bmpHeight = m
