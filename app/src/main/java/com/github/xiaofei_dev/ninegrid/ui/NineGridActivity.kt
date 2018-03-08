@@ -39,6 +39,7 @@ class NineGridActivity : BaseActivity() {
         Log.d(TAG,"bmpWidth~:$bmpWidth bmpHeight~:$bmpHeight")
 
 
+        //这里需要调换测量出的图片宽高值，具体原因参考下面两个网址
         //https://my.oschina.net/u/1444935/blog/313191
         //https://developer.android.com/reference/android/media/ExifInterface.html#TAG_ORIENTATION
         val imgOri = ExifInterface(imagePath).getAttributeInt(ExifInterface.TAG_ORIENTATION,

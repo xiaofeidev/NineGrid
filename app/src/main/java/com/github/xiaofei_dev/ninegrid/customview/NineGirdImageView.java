@@ -34,7 +34,6 @@ public class NineGirdImageView extends AppCompatImageView {
         mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(10);
-
     }
 
     @Override

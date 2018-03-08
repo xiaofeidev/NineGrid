@@ -1,6 +1,7 @@
 package com.github.xiaofei_dev.ninegrid.ui
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -19,13 +20,13 @@ import com.bumptech.glide.Glide
 import com.github.xiaofei_dev.ninegrid.R
 import com.github.xiaofei_dev.ninegrid.extensions.deleteFiles
 import com.github.xiaofei_dev.ninegrid.extensions.getViewBitmap
+import com.github.xiaofei_dev.ninegrid.extensions.requestPermission
 import com.github.xiaofei_dev.ninegrid.extensions.saveImageToDir
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
-import java.io.ByteArrayOutputStream
 import java.io.File
 
 
@@ -100,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
                 mainBottomBar.visibility = View.VISIBLE
             }
-        }else if(resultCode == android.app.Activity.RESULT_OK && requestCode == UCrop.REQUEST_CROP){
+        }else if(resultCode == Activity.RESULT_OK && requestCode == UCrop.REQUEST_CROP){
             val uri:Uri? = UCrop.getOutput(data!!)
             if (uri != null){
                 mUri = uri
@@ -109,9 +110,9 @@ class MainActivity : AppCompatActivity() {
 //                start.text  = "已选择，点击重选"
                 Log.d("MainActivity","${uri}\n${photo}")
 
-                val pho = BitmapFactory.decodeFile(photo)
-                val stream = ByteArrayOutputStream()
-                pho.compress(Bitmap.CompressFormat.PNG, 100, stream)
+//                val pho = BitmapFactory.decodeFile(photo)
+//                val stream = ByteArrayOutputStream()
+//                pho.compress(Bitmap.CompressFormat.PNG, 100, stream)
 //                Glide.with(this).load(stream.toByteArray()).asBitmap().skipMemoryCache(true).into(mainPhotoView)
 //                mainPhotoView.postDelayed(Runnable {
 //                    Glide.with(this).load(/*photo*/stream.toByteArray()).asBitmap().skipMemoryCache(true).into(mainPhotoView)
@@ -247,16 +248,11 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //请求权限
-    private fun requestPermission(permission: String,requestCode: Int) {
-        ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
-    }
-
     //选择图片
     private fun pickFromGallery() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN &&
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M&&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE,
+            requestPermission(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE),
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION)
         } else {
 //            val intent = Intent()

@@ -5,9 +5,11 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
+import android.support.v4.app.ActivityCompat
 import android.util.TypedValue
 import android.view.View
 import com.github.xiaofei_dev.ninegrid.R
+import org.jetbrains.anko.toast
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
@@ -28,8 +30,8 @@ fun Activity.dp2px(dp: Float): Int {
 
 //给 Activity 扩展的方法，保存图片到 SD 卡指定名称的文件夹
 fun Activity.saveImageToDir(bmp: Bitmap,dir:String){
-    var save:Boolean = false
-    val appDir: File = File(Environment.getExternalStorageDirectory(), dir)
+    var save:Boolean
+    val appDir = File(Environment.getExternalStorageDirectory(), dir)
     if(!appDir.exists()){
         appDir.mkdir()
     }
@@ -37,11 +39,12 @@ fun Activity.saveImageToDir(bmp: Bitmap,dir:String){
     val file: File = File(appDir, fileName)
     try {
         val fos: FileOutputStream = FileOutputStream(file)
-        save = bmp.compress(Bitmap.CompressFormat.JPEG,100,fos)
+        save = bmp.compress(Bitmap.CompressFormat.PNG,100,fos)
         fos.flush()
         fos.close()
     }catch (e: Exception){
         save = false
+        toast("${e.message}")
         e.printStackTrace()
     }
 
@@ -111,5 +114,10 @@ fun Activity.deleteFiles(file: File) {
             }
         }
     }
+}
+
+//请求权限
+fun Activity.requestPermission(permissions: Array<String>,requestCode: Int){
+    ActivityCompat.requestPermissions(this, permissions, requestCode)
 }
 

@@ -14,7 +14,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBarMain"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/AppTheme.PopupOverlay"
@@ -102,36 +102,32 @@
         android:orientation="horizontal"
         android:background="@color/colorPrimary"
         android:gravity="center_vertical"
-        android:visibility="gone">
-
+        android:visibility="visible">
         <ImageButton
             android:id="@+id/btn_action_crop"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_btn_crop" />
-
         <ImageButton
             android:id="@+id/btn_action_qq"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_btn_qq" />
-
         <ImageButton
             android:id="@+id/btn_action_wechat"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_btn_wechat" />
-
         <ImageButton
             android:id="@+id/btn_action_nine"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_btn_free" />
