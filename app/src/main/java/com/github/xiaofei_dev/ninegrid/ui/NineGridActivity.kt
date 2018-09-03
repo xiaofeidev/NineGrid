@@ -38,7 +38,6 @@ class NineGridActivity : BaseActivity() {
         bmpHeight = options.outHeight.toFloat()
         Log.d(TAG,"bmpWidth~:$bmpWidth bmpHeight~:$bmpHeight")
 
-
         //这里需要调换测量出的图片宽高值，具体原因参考下面两个网址
         //https://my.oschina.net/u/1444935/blog/313191
         //https://developer.android.com/reference/android/media/ExifInterface.html#TAG_ORIENTATION
@@ -56,7 +55,6 @@ class NineGridActivity : BaseActivity() {
 //            finish()
 //            return
 //        }
-
 
         //这一堆判断看来挺乱，其实就是把待加载图片的最终尺寸设为充满容器且没有白边且适应屏幕
         if (bmpWidth == bmpHeight){
@@ -88,7 +86,6 @@ class NineGridActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
     private fun initViews(){
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -104,14 +101,10 @@ class NineGridActivity : BaseActivity() {
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-
             }
         })
     }
-
-
 }

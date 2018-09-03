@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 
 abstract class BaseActivity : AppCompatActivity() {
-
     companion object{
         val IMAGE_PATH = "IMAGE_PATH"
         val TAG = "BaseActivity"
@@ -17,5 +16,4 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }

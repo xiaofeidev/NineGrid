@@ -22,7 +22,6 @@ class ClipQQActivity : BaseActivity() {
         initView()
     }
 
-
     private fun initView(){
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

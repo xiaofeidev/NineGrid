@@ -14,19 +14,17 @@ import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
 
-
-
 /**
  * Created by xiaofei on 2017/6/22.
  */
 
 //给 Activity 扩展的方法，dp 转 px
-fun Activity.dp2px(dp: Float): Int {
+/*fun Activity.dp2px(dp: Float): Int {
     val px = Math.round(TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, dp, resources
             .displayMetrics))
     return px
-}
+}*/
 
 //给 Activity 扩展的方法，保存图片到 SD 卡指定名称的文件夹
 fun Activity.saveImageToDir(bmp: Bitmap,dir:String){

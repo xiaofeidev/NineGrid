@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
                 mUri = data.data
                 val path = getRealPathFromURI(mUri)
                 photo = path
-//                start.text  = "已选择，点击重选"
 
                 Log.d("MainActivity","${data.data.toString()}\n${photo}")
 

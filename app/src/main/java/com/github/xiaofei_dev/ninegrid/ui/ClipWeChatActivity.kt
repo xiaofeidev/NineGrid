@@ -16,14 +16,12 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class ClipWeChatActivity : BaseActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clip_we_chat)
         imagePath = intent.getStringExtra(IMAGE_PATH)
         initView()
     }
-
 
     private fun initView(){
         setSupportActionBar(toolbar)
@@ -48,12 +46,6 @@ class ClipWeChatActivity : BaseActivity() {
             override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>?) {
                 bmpWidth = resource.width.toFloat()
                 bmpHeight = resource.height.toFloat()
-
-//                if(bmpWidth != bmpHeight){
-//                    toast("图像宽高不一致")
-//                    finish()
-//                    return
-//                }
                 //需要裁剪的长度
                 val clipStep = (bmpWidth * 0.3269).toInt()
                 //中间边距的二分之一
