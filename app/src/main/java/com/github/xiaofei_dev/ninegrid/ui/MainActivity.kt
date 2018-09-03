@@ -59,24 +59,6 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
-/*//        if (resultCode == android.app.Activity.RESULT_OK && requestCode == me.iwf.photopicker.PhotoPicker.REQUEST_CODE) {
-//            if (data !== null) {
-//                photo = data.getStringArrayListExtra(me.iwf.photopicker.PhotoPicker.KEY_SELECTED_PHOTOS)
-////                start.text  = "已选择，点击重选"
-//                Log.d("MainActivity",photo.toString())
-//
-//                mainPhotoView.visibility = View.VISIBLE
-//                Glide.with(this).load(photo[0]).asBitmap().into(mainPhotoView)
-//
-//                mainBottomBar.visibility = View.VISIBLE
-////                btn_action_qq.visibility = View.VISIBLE
-////                btn_action_wechat.visibility = View.VISIBLE
-////                btn_action_nine.visibility = View.VISIBLE
-////                startActivity<ClipQQActivity>(ClipQQActivity.IMAGE_PATH to photo)
-////                android.util.Log.d("MainActivity",photo.toString())
-//            }
-//        }*/
-
         if (resultCode == android.app.Activity.RESULT_OK && requestCode == REQUEST_SELECT_PICTURE) {
             if (data != null) {
                 mUri = data.data
@@ -88,7 +70,6 @@ class MainActivity : AppCompatActivity() {
 
                 mainPhotoView.visibility = View.VISIBLE
 //                mainPhotoView.postDelayed(Runnable {  Glide.with(this).load(photo).asBitmap().into(mainPhotoView) },2000)
-
 
                 Glide.with(this).load(photo).asBitmap().into(mainPhotoView)
 
@@ -107,7 +88,6 @@ class MainActivity : AppCompatActivity() {
                 mUri = uri
                 val path = getRealPathFromURI(uri)
                 photo = path
-//                start.text  = "已选择，点击重选"
                 Log.d("MainActivity","${uri}\n${photo}")
 
 //                val pho = BitmapFactory.decodeFile(photo)

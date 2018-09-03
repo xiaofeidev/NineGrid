@@ -8,9 +8,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
-    <!--<include-->
-        <!--android:id="@+id/appbar"-->
-        <!--layout="@layout/toolbar" />-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBarMain"
         android:layout_width="match_parent"
@@ -31,19 +28,11 @@
             android:textColor="@color/colorAccent"/>
     </android.support.v7.widget.Toolbar>
 
-    <!--<Button-->
-        <!--android:id="@+id/start"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="选择"-->
-        <!--android:layout_centerInParent="true" />-->
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark">
-
         <TextView
             android:id="@+id/start"
             android:layout_width="match_parent"
@@ -60,40 +49,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:visibility="gone"/>
-
     </FrameLayout>
-
-    <!--<Button-->
-        <!--android:id="@+id/btn_action_qq"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/start"-->
-        <!--android:layout_marginTop="35dp"-->
-        <!--android:layout_toLeftOf="@+id/start"-->
-        <!--android:layout_toStartOf="@+id/start"-->
-        <!--android:visibility="visible"-->
-        <!--android:text="QQ" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/btn_action_wechat"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignTop="@+id/btn_action_qq"-->
-        <!--android:layout_toEndOf="@+id/start"-->
-        <!--android:layout_toRightOf="@+id/start"-->
-        <!--android:visibility="visible"-->
-        <!--android:text="微信" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/btn_action_nine"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignEnd="@+id/btn_action_qq"-->
-        <!--android:layout_alignRight="@+id/btn_action_qq"-->
-        <!--android:layout_below="@+id/btn_action_qq"-->
-        <!--android:layout_marginTop="43dp"-->
-        <!--android:visibility="visible"-->
-        <!--android:text="九宫格" />-->
 
     <LinearLayout
         android:id="@+id/mainBottomBar"
@@ -132,5 +88,4 @@
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_btn_free" />
     </LinearLayout>
-
 </LinearLayout>

@@ -36,9 +36,9 @@ fun Activity.saveImageToDir(bmp: Bitmap,dir:String){
         appDir.mkdir()
     }
     val fileName:String = System.currentTimeMillis().toString() + ".jpg"
-    val file: File = File(appDir, fileName)
+    val file = File(appDir, fileName)
     try {
-        val fos: FileOutputStream = FileOutputStream(file)
+        val fos = FileOutputStream(file)
         save = bmp.compress(Bitmap.CompressFormat.PNG,100,fos)
         fos.flush()
         fos.close()
@@ -100,6 +100,7 @@ fun Activity.getViewBitmap(v: View): Bitmap {
 //        file.delete()
 //    }
 //}
+
 //删除缓存文件夹中的缓存图片
 fun Activity.deleteFiles(file: File) {
     if (file.isDirectory) {
