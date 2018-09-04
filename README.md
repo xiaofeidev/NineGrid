@@ -12,5 +12,5 @@
 # 界面预览
 
 
-<img src="https://github.com/xiaofei-dev/NineGrid/blob/master/app/art/enframe_2017-07-20-12-19-18.png" width="20%" height="20%"><img src="https://github.com/xiaofei-dev/NineGrid/blob/master/app/art/enframe_2017-07-20-12-19-27.png" width="20%" height="20%">
-<img src="https://github.com/xiaofei-dev/NineGrid/blob/master/app/art/enframe_2017-07-20-12-19-43.png" width="20%" height="20%"><img src="https://github.com/xiaofei-dev/NineGrid/blob/master/app/art/enframe_2017-07-20-12-19-58.png" width="20%" height="20%">
+<img src="https://github.com/xiaofei-dev/NineGrid/blob/master/app/art/enframe_2017-07-20-12-19-18.png" width="24%" height="24%"><img src="https://github.com/xiaofei-dev/NineGrid/blob/master/app/art/enframe_2017-07-20-12-19-27.png" width="24%" height="24%">
+<img src="https://github.com/xiaofei-dev/NineGrid/blob/master/app/art/enframe_2017-07-20-12-19-43.png" width="24%" height="24%"><img src="https://github.com/xiaofei-dev/NineGrid/blob/master/app/art/enframe_2017-07-20-12-19-58.png" width="24%" height="24%">
