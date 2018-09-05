@@ -58,7 +58,7 @@
         android:orientation="horizontal"
         android:background="@color/colorPrimary"
         android:gravity="center_vertical"
-        android:visibility="visible">
+        android:visibility="gone">
         <ImageButton
             android:id="@+id/btn_action_crop"
             android:layout_width="wrap_content"
