@@ -123,7 +123,11 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.save ->{
-                saveImageToDir(getViewBitmap(mainPhotoView),"NineGrid")
+                if (mainPhotoView.visibility != View.VISIBLE){
+                    toast("去选一张图片吧")
+                }else{
+                    saveImageToDir(getViewBitmap(mainPhotoView),"NineGrid")
+                }
             }
             R.id.about ->{
                 startActivity<AboutActivity>()
@@ -198,11 +202,9 @@ class MainActivity : AppCompatActivity() {
             //如果待处理图像的长宽比太奇葩则拒绝服务
             if (bmpWidth/bmpHeight > 2f || bmpWidth/bmpHeight < 0.5f){
                 toast(R.string.size_error)
-//                return@setOnClickListener
             }else{
                 startActivity<NineGridActivity>(BaseActivity.IMAGE_PATH to photo)
             }
-
         }
 
         btn_open_new.setOnClickListener {
